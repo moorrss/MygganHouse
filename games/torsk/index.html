@@ -1885,7 +1885,14 @@
   }
 
   // ---------------- Events ----------------
-  spinBtn.addEventListener('click', () => doSpin(inBonus));
+  spinBtn.addEventListener('click', () => {
+    const spinSound = document.getElementById('spinSound');
+    if (spinSound && spinSound.paused) {
+        spinSound.play().catch(e => console.log("Ljudfel:", e));
+    }
+    
+    doSpin(inBonus);
+});
   buyBonusBtn.addEventListener('click', buyBonus);
   betDown.addEventListener('click', () => {
     if(betIndex > 0){ betIndex--; updateUI(); updateButtons(); }
@@ -1927,5 +1934,6 @@
 
 })();
 </script>
+<audio id="spinSound" src="./assets/audio/basegametorsk.mp3" preload="auto" loop></audio>
 </body>
 </html>
