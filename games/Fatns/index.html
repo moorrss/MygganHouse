@@ -371,7 +371,7 @@
       <div class="value" id="winVal">0 kr</div>
     </div>
   </div>
-
+<audio id="spinSound" src="assets/audio/basegamefatn.mp3" preload="auto"></audio>
   <footer>Fiktivt lekspel utan riktiga pengar. Myggan House &copy; 2026.</footer>
 </div>
 
@@ -939,7 +939,14 @@
   }
 
   // ---------------- Events ----------------
-  spinBtn.addEventListener('click', () => doSpin(inBonus));
+  spinBtn.addEventListener('click', () => {
+    const spinSound = document.getElementById('spinSound');
+    if (spinSound) {
+        spinSound.currentTime = 0; // Återställ ljudet till början
+        spinSound.play().catch(e => console.log("Ljudfel:", e));
+    }
+    doSpin(inBonus);
+});
   betDown.addEventListener('click', () => { if(betIndex>0){ betIndex--; updateUI(); updateButtons(); } });
   betUp.addEventListener('click', () => { if(betIndex<BET_LEVELS.length-1){ betIndex++; updateUI(); updateButtons(); } });
   buyBonusBtn.addEventListener('click', buyBonus);
@@ -959,5 +966,6 @@
 
 })();
 </script>
+  <audio id="spinSound" src="assets/audio/basegamefatn.mp3" preload="auto"></audio>
 </body>
 </html>
