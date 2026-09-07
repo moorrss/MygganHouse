@@ -939,13 +939,13 @@
   }
 
   // ---------------- Events ----------------
-  spinBtn.addEventListener('click', () => {
+spinBtn.addEventListener('click', () => {
     const spinSound = document.getElementById('spinSound');
-    if (spinSound) {
-        spinSound.currentTime = 0; // Återställ ljudet till början
+    if (spinSound && spinSound.paused) {
         spinSound.play().catch(e => console.log("Ljudfel:", e));
     }
     doSpin(inBonus);
+});
 });
   betDown.addEventListener('click', () => { if(betIndex>0){ betIndex--; updateUI(); updateButtons(); } });
   betUp.addEventListener('click', () => { if(betIndex<BET_LEVELS.length-1){ betIndex++; updateUI(); updateButtons(); } });
@@ -964,8 +964,7 @@
   updateButtons();
   showBanner('Släpp loss samlarna — lycka till!', 3000);
 
-})();
 </script>
-  <audio id="spinSound" src="assets/audio/basegamefatn.mp3" preload="auto"></audio>
+ <audio id="spinSound" src="assets/audio/basegamefatn.mp3" preload="auto" loop></audio>
 </body>
 </html>
